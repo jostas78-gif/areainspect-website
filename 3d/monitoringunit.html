@@ -1410,6 +1410,8 @@ if (EMB.has('embed')){
     camKeys = filmScenario === 'building' ? camKeysBuild : camKeysWind;
     t = Math.max(0, Math.min(FILM_DUR - .1, t || 0));
     mode = 'none'; filmEvents(t); cur = JSON.parse(JSON.stringify(goal)); simulate(0, 100 + t);
+    // in 3D always show the scene this film is about (turbine or building) behind the unit
+    const W = filmScenario === 'wind'; turbine.visible = W; building.visible = !W; if (W) bats.forEach(b => b.visible = true);
     const c = camAt(t); camera.position.set(...c.p); controls.target.set(...c.q); tw = null;
     controls.autoRotate = false; controls.update();
   };
