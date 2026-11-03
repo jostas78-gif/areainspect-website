@@ -97,9 +97,7 @@ section{scroll-margin-top:8px}
 .info{flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:24px}
 .info h3{font-size:22px}
 .renders{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-.renders button{padding:0;border:0;background:#e3e5e8;border-radius:12px;overflow:hidden;cursor:zoom-in;aspect-ratio:1/1}
-.renders img{width:100%;height:100%;object-fit:cover;transition:transform .3s ease}
-.renders button:hover img{transform:scale(1.04)}
+.renders img{width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;border-radius:12px;background:#e3e5e8}
 .vinkjes{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
 .vinkjes li{display:flex;gap:12px;align-items:flex-start}
 .vinkjes svg{flex:0 0 22px;margin-top:3px;background:var(--geel);border-radius:6px;padding:2px}
@@ -161,12 +159,20 @@ footer .kolom{display:flex;flex-direction:column;gap:4px}
 footer a{color:#c9cdd2}
 footer a:hover{color:var(--geel)}
 
-/* lightbox */
-dialog.groot{border:0;padding:0;background:transparent;max-width:min(92vw,92vh);width:100%}
-dialog.groot::backdrop{background:rgba(0,0,0,.85)}
-dialog.groot img{width:100%;height:auto;border-radius:14px}
-dialog.groot p{color:#fff;text-align:center;margin-top:10px;font-size:15px}
-dialog.groot button{position:absolute;top:8px;right:8px;width:44px;height:44px;border-radius:999px;border:0;background:rgba(17,17,17,.75);color:#fff;font-size:24px;cursor:pointer}
+/* film -> interactive 3D */
+.film[data-3d]{cursor:pointer}
+.film .knop3d{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;opacity:0;transition:opacity .2s ease;background:radial-gradient(circle at center,rgba(0,0,0,.35),rgba(0,0,0,0) 60%)}
+.film[data-3d]:hover .knop3d,.film[data-3d]:focus-visible .knop3d{opacity:1}
+.knop3d .rond{display:flex;align-items:center;gap:12px;background:rgba(17,17,17,.88);color:#fff;border:2px solid var(--geel);border-radius:999px;padding:12px 20px 12px 14px;font-weight:600;font-size:15px;box-shadow:0 8px 24px rgba(0,0,0,.35)}
+.knop3d .rond svg{flex:0 0 34px}
+.film .badge3d{position:absolute;right:12px;bottom:12px;background:rgba(17,17,17,.82);color:#fff;font-size:13px;font-weight:600;padding:7px 12px;border-radius:999px;display:flex;gap:6px;align-items:center;pointer-events:none;border:1px solid rgba(245,192,0,.6)}
+.film.in3d{cursor:default}
+.film.in3d .knop3d,.film.in3d .badge3d{display:none}
+.film iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#bcd0e0}
+.film .hint3d{position:absolute;left:12px;right:12px;top:12px;display:flex;justify-content:space-between;align-items:flex-start;gap:8px;pointer-events:none}
+.film .hint3d span{background:rgba(17,17,17,.82);color:#fff;font-size:13px;padding:7px 12px;border-radius:12px;line-height:1.35}
+.film .verder{pointer-events:auto;display:inline-flex;align-items:center;gap:8px;background:var(--geel);color:var(--inkt);border:0;border-radius:999px;padding:10px 16px;font:inherit;font-weight:600;font-size:14px;cursor:pointer;min-height:44px;white-space:nowrap}
+@media (hover:hover){.film .badge3d{opacity:.0}.film[data-3d]:not(:hover) .badge3d{opacity:1}}
 
 @media (max-width:640px){
   body{font-size:16px}
