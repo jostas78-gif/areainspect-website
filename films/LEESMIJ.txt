@@ -1,0 +1,8 @@
+Zet hier de drie films neer, met precies deze namen:
+
+  AreaInspect-monitoring-unit-building.mp4      (gebouw: bovenaan de pagina en bij "Gebouwen")
+  AreaInspect-monitoring-unit-wind-turbine.mp4  (windmolen: bij "Mini-windmolens")
+  AreaInspect-smart-bee-hotel.mp4               (Smart Bee Hotel)
+
+Zolang een film ontbreekt, toont de website op die plek een render.
+Tip: houd elke film onder ca. 8 MB, dan laadt de pagina snel op een telefoon.
