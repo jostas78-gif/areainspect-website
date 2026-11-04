@@ -3,7 +3,7 @@
   'use strict';
 
   // Adres waar het contactformulier naartoe gaat (n8n-webhook). Leeg = alleen e-mailprogramma openen.
-  var FORMULIER_URL = '';
+  var FORMULIER_URL = 'https://n8n.jt-ecologie.nl/webhook/areainspect-contact';
   var MAIL = 'info@areainspect.com';
 
   var rustig = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -115,8 +115,13 @@
     if (!FORMULIER_URL) { viaMail(d); return; }
     var knop = form.querySelector('button[type=submit]');
     knop.disabled = true; knop.textContent = 'Bezig met versturen…';
-    fetch(FORMULIER_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(d) })
-      .then(function (r) { if (!r.ok) throw new Error(r.status); form.reset(); toon('Dank u wel. We hebben uw bericht ontvangen en nemen snel contact met u op.', true); })
+    // Als formuliergegevens versturen (geen JSON): dan is er geen CORS-voorcontrole nodig.
+    fetch(FORMULIER_URL, { method: 'POST', body: new URLSearchParams(d) })
+      .then(function (r) {
+        if (r.ok) { form.reset(); toon('Dank u wel. We hebben uw bericht ontvangen en nemen snel contact met u op.', true); return; }
+        if (r.status === 400 || r.status === 429) return r.json().then(function (j) { toon(j.fout || 'Controleer de velden en probeer het opnieuw.', false); });
+        throw new Error(r.status);
+      })
       .catch(function () { viaMail(d); })
       .then(function () { knop.disabled = false; knop.textContent = 'Verstuur bericht'; });
   });
