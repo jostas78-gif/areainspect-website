@@ -102,10 +102,20 @@ section{scroll-margin-top:8px}
 .keuze button[aria-pressed="true"]{background:var(--geel);border-color:var(--geel)}
 .keuze .titel{display:flex;align-items:center;gap:10px;font-family:var(--kop);font-weight:700;font-size:19px}
 .keuze .uitleg{font-size:15px;color:#3d4249}
-.rij{display:flex;flex-wrap:wrap;gap:48px;align-items:flex-start}
-.rij.omgekeerd{flex-wrap:wrap-reverse;align-items:flex-end}
-.media{flex:1 1 520px;min-width:0;display:flex;flex-direction:column;gap:16px}
-.info{flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:24px}
+/* Product: film even hoog als tekst + renders ernaast */
+.rij{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:48px;align-items:stretch}
+.rij.film-rechts{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr)}
+.media{min-width:0;display:flex;flex-direction:column}
+.media .film{flex:1 1 auto;height:0;min-height:380px;aspect-ratio:auto}
+.media .film video{object-position:50% 50%}
+.info{min-width:0;display:flex;flex-direction:column;gap:24px}
+.info .renders{margin-top:auto}
+@media (max-width:900px){
+  .rij,.rij.film-rechts{grid-template-columns:minmax(0,1fr);gap:28px}
+  .rij.film-rechts .media{order:-1}
+  .media .film{height:auto;min-height:0;aspect-ratio:1/1}
+  .media .film video{object-position:50% 50%}
+}
 .info h3{font-size:22px}
 .renders{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
 .renders img{width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;border-radius:12px;background:#e3e5e8}
