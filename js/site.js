@@ -5,6 +5,8 @@
   // Adres waar het contactformulier naartoe gaat (n8n-webhook). Leeg = alleen e-mailprogramma openen.
   var FORMULIER_URL = 'https://n8n.jt-ecologie.nl/webhook/areainspect-contact';
   var MAIL = 'info@areainspect.com';
+  var T = window.AI_T || {};
+  function tr(k, nl) { return T[k] || nl; }
 
   var rustig = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -41,7 +43,7 @@
       }
     });
     if (merk) {
-      merk.src = t === 'wind' ? 'img/bird.png' : 'img/bat.png';
+      merk.src = merk.src.replace(/(bird|bat)\.png$/, t === 'wind' ? 'bird.png' : 'bat.png');
       merk.className = t === 'wind' ? 'vogel' : 'vleermuis';
     }
   }
@@ -65,13 +67,13 @@
     if (v) v.pause();
     fig.classList.add('in3d'); actief = fig;
     var fr = document.createElement('iframe');
-    fr.title = '3D-weergave: draai, zoom en bekijk dit moment van de film';
+    fr.title = tr('js_iframe_titel', '3D-weergave: draai, zoom en bekijk dit moment van de film');
     fr.allow = 'fullscreen';
     fr.src = fig.dataset['3d'] + '&t=' + t.toFixed(2);
     var hint = document.createElement('div'); hint.className = 'hint3d';
-    hint.innerHTML = '<span>Sleep om te draaien · scroll of knijp om te zoomen<br>Klik in het beeld om de film verder te laten lopen</span>';
+    hint.innerHTML = '<span>' + tr('js_hint3d', 'Sleep om te draaien · scroll of knijp om te zoomen<br>Klik in het beeld om de film verder te laten lopen') + '</span>';
     var knop = document.createElement('button'); knop.type = 'button'; knop.className = 'verder';
-    knop.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4l13 8-13 8z" fill="#111214"/></svg>Film verder';
+    knop.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4l13 8-13 8z" fill="#111214"/></svg>' + tr('js_verder', 'Film verder');
     knop.addEventListener('click', function (e) { e.stopPropagation(); sluit3d(fig, true); });
     hint.appendChild(knop);
     fig.appendChild(fr); fig.appendChild(hint);
@@ -79,9 +81,9 @@
   document.querySelectorAll('.film[data-3d]').forEach(function (fig) {
     fig.tabIndex = 0;
     fig.setAttribute('role', 'button');
-    fig.setAttribute('aria-label', 'Pauzeer de film en bekijk dit moment in 3D');
+    fig.setAttribute('aria-label', tr('js_film_label', 'Pauzeer de film en bekijk dit moment in 3D'));
     var k = document.createElement('div'); k.className = 'knop3d';
-    k.innerHTML = '<span class="rond">' + ICOON + 'Klik: pauzeer en bekijk in 3D</span>';
+    k.innerHTML = '<span class="rond">' + ICOON + tr('js_knop3d', 'Klik: pauzeer en bekijk in 3D') + '</span>';
     var b = document.createElement('div'); b.className = 'badge3d';
     b.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f5c000" stroke-width="2" aria-hidden="true"><path d="M12 2l8.5 4.9v9.8L12 21.6 3.5 16.7V6.9z"/></svg>3D';
     fig.appendChild(k); fig.appendChild(b);
@@ -99,30 +101,32 @@
   var melding = document.getElementById('formMelding');
   function toon(tekst, ok) { melding.hidden = false; melding.textContent = tekst; melding.className = 'melding ' + (ok ? 'ok' : 'fout'); }
   function viaMail(d) {
-    var onderwerp = 'Contact via areainspect.com – ' + d.interesse;
+    var onderwerp = tr('js_mail_onderwerp', 'Contact via areainspect.com') + ' – ' + d.interesse;
     var tekst = d.bericht + '\n\n' + d.naam_organisatie + '\n' + d.email;
     window.location.href = 'mailto:' + MAIL + '?subject=' + encodeURIComponent(onderwerp) + '&body=' + encodeURIComponent(tekst);
-    toon('Uw e-mailprogramma wordt geopend met uw bericht. Verstuur de e-mail om het bericht te verzenden.', true);
+    toon(tr('js_mail_open', 'Uw e-mailprogramma wordt geopend met uw bericht. Verstuur de e-mail om het bericht te verzenden.'), true);
   }
   form.addEventListener('submit', function (e) {
     e.preventDefault();
-    if (!form.checkValidity()) { toon('Vul uw naam, een geldig e-mailadres en een bericht in.', false); form.reportValidity && form.reportValidity(); return; }
+    if (!form.checkValidity()) { toon(tr('js_ongeldig', 'Vul uw naam, een geldig e-mailadres en een bericht in.'), false); form.reportValidity && form.reportValidity(); return; }
     var d = {};
     new FormData(form).forEach(function (v, k) { d[k] = String(v).trim(); });
     if (d.website) return; // spamfilter
     delete d.website;
     d.pagina = location.href;
+    d.taal = document.documentElement.lang;
     if (!FORMULIER_URL) { viaMail(d); return; }
     var knop = form.querySelector('button[type=submit]');
-    knop.disabled = true; knop.textContent = 'Bezig met versturen…';
+    knop.disabled = true; knop.textContent = tr('js_bezig', 'Bezig met versturen…');
     // Als formuliergegevens versturen (geen JSON): dan is er geen CORS-voorcontrole nodig.
     fetch(FORMULIER_URL, { method: 'POST', body: new URLSearchParams(d) })
       .then(function (r) {
-        if (r.ok) { form.reset(); toon('Dank u wel. We hebben uw bericht ontvangen en nemen snel contact met u op.', true); return; }
-        if (r.status === 400 || r.status === 429) return r.json().then(function (j) { toon(j.fout || 'Controleer de velden en probeer het opnieuw.', false); });
+        if (r.ok) { form.reset(); toon(tr('js_bedankt', 'Dank u wel. We hebben uw bericht ontvangen en nemen snel contact met u op.'), true); return; }
+        if (r.status === 400) { toon(tr('js_ongeldig', 'Vul uw naam, een geldig e-mailadres en een bericht in.'), false); return; }
+        if (r.status === 429) { toon(tr('js_te_vaak', 'U hebt net al een bericht gestuurd. Probeer het later opnieuw of mail naar info@areainspect.com.'), false); return; }
         throw new Error(r.status);
       })
       .catch(function () { viaMail(d); })
-      .then(function () { knop.disabled = false; knop.textContent = 'Verstuur bericht'; });
+      .then(function () { knop.disabled = false; knop.textContent = tr('form_knop', 'Verstuur bericht'); });
   });
 })();

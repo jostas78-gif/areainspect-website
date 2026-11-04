@@ -3,11 +3,80 @@
 <head>
 <meta charset="utf-8">
 <script>if(location.protocol==="http:"&&/(^|\.)areainspect\.com$/.test(location.hostname))location.replace("https://areainspect.com"+location.pathname+location.search+location.hash);</script>
+<script>(function(){try{
+var ua=navigator.userAgent||'';
+if(/bot|crawl|spider|slurp|lighthouse|facebookexternalhit|preview|headless/i.test(ua))return;
+var keuze=null;try{keuze=localStorage.getItem('ai-taal')}catch(e){}
+var T=['en','de','fr','es','it','no','sv','da','pl','fi','pt','cs','sk','hu','ro','hr','sr','sl','bg','el','et','lv','lt','uk'];
+var doel=keuze;
+if(!doel){
+ var tz='';try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone||''}catch(e){}
+ var nav=(navigator.languages&&navigator.languages.length?navigator.languages:[navigator.language||'']).map(function(l){return String(l).toLowerCase().split('-')[0]});
+ var heeft=function(c){return nav.indexOf(c)>-1};
+ var Z={
+  'Europe/Amsterdam':'nl',
+  'Europe/Berlin':'de','Europe/Busingen':'de','Europe/Vienna':'de','Europe/Vaduz':'de',
+  'Europe/Paris':'fr','Europe/Monaco':'fr',
+  'Europe/Madrid':'es','Atlantic/Canary':'es','Africa/Ceuta':'es','Europe/Andorra':'es',
+  'Europe/Rome':'it','Europe/Vatican':'it','Europe/San_Marino':'it',
+  'Europe/London':'en','Europe/Dublin':'en','Europe/Guernsey':'en','Europe/Jersey':'en','Europe/Isle_of_Man':'en','Europe/Gibraltar':'en','Europe/Malta':'en',
+  'Europe/Oslo':'no','Arctic/Longyearbyen':'no',
+  'Europe/Stockholm':'sv','Europe/Mariehamn':'sv',
+  'Europe/Copenhagen':'da','Atlantic/Faroe':'da',
+  'Europe/Warsaw':'pl','Europe/Helsinki':'fi',
+  'Europe/Lisbon':'pt','Atlantic/Madeira':'pt','Atlantic/Azores':'pt',
+  'Europe/Prague':'cs','Europe/Bratislava':'sk','Europe/Budapest':'hu',
+  'Europe/Bucharest':'ro','Europe/Chisinau':'ro',
+  'Europe/Zagreb':'hr','Europe/Sarajevo':'hr',
+  'Europe/Belgrade':'sr','Europe/Podgorica':'sr',
+  'Europe/Ljubljana':'sl','Europe/Sofia':'bg',
+  'Europe/Athens':'el','Asia/Nicosia':'el','Europe/Nicosia':'el','Asia/Famagusta':'el',
+  'Europe/Tallinn':'et','Europe/Riga':'lv','Europe/Vilnius':'lt',
+  'Europe/Kyiv':'uk','Europe/Kiev':'uk','Europe/Uzhgorod':'uk','Europe/Zaporozhye':'uk'
+ };
+ var t=Z[tz];
+ if(tz==='Europe/Brussels')t=heeft('fr')&&!heeft('nl')?'fr':heeft('de')&&!heeft('nl')?'de':'nl';
+ else if(tz==='Europe/Zurich')t=heeft('fr')?'fr':heeft('it')?'it':'de';
+ else if(tz==='Europe/Luxembourg')t=heeft('de')&&!heeft('fr')?'de':'fr';
+ else if(tz==='Europe/Helsinki'&&heeft('sv')&&!heeft('fi'))t='sv';
+ else if((tz==='Europe/Belgrade'&&heeft('sq'))||((tz==='Asia/Nicosia'||tz==='Asia/Famagusta')&&heeft('tr'))||(tz==='Europe/Chisinau'&&heeft('ru')&&!heeft('ro')))t='en';
+ if(!t&&/^America\/(Argentina\/.*|Buenos_Aires|Mexico_City|Cancun|Merida|Monterrey|Matamoros|Chihuahua|Ciudad_Juarez|Ojinaga|Mazatlan|Bahia_Banderas|Hermosillo|Tijuana|Guatemala|El_Salvador|Tegucigalpa|Managua|Costa_Rica|Panama|Havana|Santo_Domingo|Puerto_Rico|Bogota|Caracas|Lima|Guayaquil|La_Paz|Santiago|Punta_Arenas|Asuncion|Montevideo)$|^Pacific\/(Galapagos|Easter)$|^Africa\/Malabo$/.test(tz))t='es';
+ if(!t&&/^America\/(Sao_Paulo|Bahia|Fortaleza|Recife|Belem|Manaus|Cuiaba|Campo_Grande|Porto_Velho|Boa_Vista|Rio_Branco|Eirunepe|Araguaina|Maceio|Santarem|Noronha)$|^Africa\/Luanda$/.test(tz))t='pt';
+ doel=t||'en';
+}
+if(doel!=='nl'&&T.indexOf(doel)>-1)location.replace(doel+'/'+location.search+location.hash);
+}catch(e){}})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AreaInspect – AI-powered fauna monitoring</title>
-<meta name="description" content="AreaInspect ontwikkelt slimme meetunits met warmtebeeld- en 4K-camera's, geluidssensoren en AI-herkenning voor vleermuizen en vogels bij windmolens en gebouwen, en voor wilde bijen bij bijenhotels.">
+<meta name="description" content="AreaInspect ontwikkelt slimme meetunits met warmtebeeld- en 4K-camera&#x27;s, geluidssensoren en AI-herkenning voor vleermuizen en vogels bij windmolens en gebouwen, en voor wilde bijen bij bijenhotels.">
 <meta name="theme-color" content="#111111">
 <link rel="canonical" href="https://areainspect.com/">
+<link rel="alternate" hreflang="en-GB" href="https://areainspect.com/en/">
+<link rel="alternate" hreflang="de" href="https://areainspect.com/de/">
+<link rel="alternate" hreflang="fr" href="https://areainspect.com/fr/">
+<link rel="alternate" hreflang="es" href="https://areainspect.com/es/">
+<link rel="alternate" hreflang="it" href="https://areainspect.com/it/">
+<link rel="alternate" hreflang="nl" href="https://areainspect.com/">
+<link rel="alternate" hreflang="nb" href="https://areainspect.com/no/">
+<link rel="alternate" hreflang="sv" href="https://areainspect.com/sv/">
+<link rel="alternate" hreflang="da" href="https://areainspect.com/da/">
+<link rel="alternate" hreflang="pl" href="https://areainspect.com/pl/">
+<link rel="alternate" hreflang="fi" href="https://areainspect.com/fi/">
+<link rel="alternate" hreflang="pt-PT" href="https://areainspect.com/pt/">
+<link rel="alternate" hreflang="cs" href="https://areainspect.com/cs/">
+<link rel="alternate" hreflang="sk" href="https://areainspect.com/sk/">
+<link rel="alternate" hreflang="hu" href="https://areainspect.com/hu/">
+<link rel="alternate" hreflang="ro" href="https://areainspect.com/ro/">
+<link rel="alternate" hreflang="hr" href="https://areainspect.com/hr/">
+<link rel="alternate" hreflang="sr-Latn" href="https://areainspect.com/sr/">
+<link rel="alternate" hreflang="sl" href="https://areainspect.com/sl/">
+<link rel="alternate" hreflang="bg" href="https://areainspect.com/bg/">
+<link rel="alternate" hreflang="el" href="https://areainspect.com/el/">
+<link rel="alternate" hreflang="et" href="https://areainspect.com/et/">
+<link rel="alternate" hreflang="lv" href="https://areainspect.com/lv/">
+<link rel="alternate" hreflang="lt" href="https://areainspect.com/lt/">
+<link rel="alternate" hreflang="uk" href="https://areainspect.com/uk/">
+<link rel="alternate" hreflang="x-default" href="https://areainspect.com/en/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="nl_NL">
 <meta property="og:site_name" content="AreaInspect">
@@ -19,17 +88,19 @@
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" href="img/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
-<link rel="preload" href="fonts/poppins-700.woff" as="font" type="font/woff" crossorigin>
+<link rel="preload" href="fonts/poppins-700-latin.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="css/site.css">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Organization","name":"AreaInspect","url":"https://areainspect.com/","logo":"https://areainspect.com/img/icon-512.png","email":"info@areainspect.com","telephone":"+31648646895","address":{"@type":"PostalAddress","streetAddress":"Newtonlaan 115","postalCode":"3584 BH","addressLocality":"Utrecht","addressCountry":"NL"}}
 </script>
+<script>window.AI_T={"form_knop": "Verstuur bericht", "js_hint3d": "Sleep om te draaien · scroll of knijp om te zoomen<br>Klik in het beeld om de film verder te laten lopen", "js_verder": "Film verder", "js_iframe_titel": "3D-weergave: draai, zoom en bekijk dit moment van de film", "js_film_label": "Pauzeer de film en bekijk dit moment in 3D", "js_knop3d": "Klik: pauzeer en bekijk in 3D", "js_mail_onderwerp": "Contact via areainspect.com", "js_mail_open": "Uw e-mailprogramma wordt geopend met uw bericht. Verstuur de e-mail om het bericht te verzenden.", "js_ongeldig": "Vul uw naam, een geldig e-mailadres en een bericht in.", "js_bezig": "Bezig met versturen…", "js_bedankt": "Dank u wel. We hebben uw bericht ontvangen en nemen snel contact met u op.", "js_te_vaak": "U hebt net al een bericht gestuurd. Probeer het later opnieuw of mail naar info@areainspect.com."};</script>
 <script src="https://test-app.jt-ecologie.nl/api/teller.js" defer></script>
 </head>
 <body>
 <a class="skip" href="#inhoud">Naar de inhoud</a>
 
 <header class="kop">
+  <details class="taalmenu"><summary aria-label="Taal kiezen / Language"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.5c2.6 2.8 3.9 6 3.9 9.5s-1.3 6.7-3.9 9.5c-2.6-2.8-3.9-6-3.9-9.5s1.3-6.7 3.9-9.5z"/></svg><span>NL</span><svg class="pijl" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary><ul><li><a href="en/" lang="en-GB" hreflang="en" data-taal="en">English<small>EN</small></a></li><li><a href="de/" lang="de" hreflang="de" data-taal="de">Deutsch<small>DE</small></a></li><li><a href="fr/" lang="fr" hreflang="fr" data-taal="fr">Français<small>FR</small></a></li><li><a href="es/" lang="es" hreflang="es" data-taal="es">Español<small>ES</small></a></li><li><a href="it/" lang="it" hreflang="it" data-taal="it">Italiano<small>IT</small></a></li><li><a href="./" lang="nl" hreflang="nl" data-taal="nl" aria-current="true">Nederlands<small>NL</small></a></li><li class="scheiding" role="separator"></li><li><a href="no/" lang="nb" hreflang="no" data-taal="no">Norsk<small>NO</small></a></li><li><a href="sv/" lang="sv" hreflang="sv" data-taal="sv">Svenska<small>SV</small></a></li><li><a href="da/" lang="da" hreflang="da" data-taal="da">Dansk<small>DA</small></a></li><li><a href="pl/" lang="pl" hreflang="pl" data-taal="pl">Polski<small>PL</small></a></li><li><a href="fi/" lang="fi" hreflang="fi" data-taal="fi">Suomi<small>FI</small></a></li><li><a href="pt/" lang="pt-PT" hreflang="pt" data-taal="pt">Português<small>PT</small></a></li><li><a href="cs/" lang="cs" hreflang="cs" data-taal="cs">Čeština<small>CS</small></a></li><li><a href="sk/" lang="sk" hreflang="sk" data-taal="sk">Slovenčina<small>SK</small></a></li><li><a href="hu/" lang="hu" hreflang="hu" data-taal="hu">Magyar<small>HU</small></a></li><li><a href="ro/" lang="ro" hreflang="ro" data-taal="ro">Română<small>RO</small></a></li><li><a href="hr/" lang="hr" hreflang="hr" data-taal="hr">Hrvatski<small>HR</small></a></li><li><a href="sr/" lang="sr-Latn" hreflang="sr" data-taal="sr">Srpski<small>SR</small></a></li><li><a href="sl/" lang="sl" hreflang="sl" data-taal="sl">Slovenščina<small>SL</small></a></li><li><a href="bg/" lang="bg" hreflang="bg" data-taal="bg">Български<small>BG</small></a></li><li><a href="el/" lang="el" hreflang="el" data-taal="el">Ελληνικά<small>EL</small></a></li><li><a href="et/" lang="et" hreflang="et" data-taal="et">Eesti<small>ET</small></a></li><li><a href="lv/" lang="lv" hreflang="lv" data-taal="lv">Latviešu<small>LV</small></a></li><li><a href="lt/" lang="lt" hreflang="lt" data-taal="lt">Lietuvių<small>LT</small></a></li><li><a href="uk/" lang="uk" hreflang="uk" data-taal="uk">Українська<small>UK</small></a></li></ul></details>
   <div class="wrap">
     <a class="logo" href="#top"><img src="img/areainspect-logo.webp" width="1225" height="238" alt="AreaInspect – AI-Powered Fauna Monitoring Solutions"></a>
     <nav aria-label="Hoofdmenu">
@@ -135,7 +206,7 @@
         </figure>
         <div class="renders" data-paneel="wind">
           <img src="img/wind-unit-540.webp" width="540" height="540" loading="lazy" alt="Monitoringunit met AreaInspect-voet">
-          <img src="img/wind-kegels-540.webp" width="540" height="540" loading="lazy" alt="Kijkkegels van de camera's op de windmolen">
+          <img src="img/wind-kegels-540.webp" width="540" height="540" loading="lazy" alt="Kijkkegels van de camera&#x27;s op de windmolen">
           <img src="img/wind-nacht-540.webp" width="540" height="540" loading="lazy" alt="Windmolen bij nacht met vleermuizen in het warmtebeeld">
         </div>
         <div class="renders" data-paneel="gebouw" hidden>
@@ -197,7 +268,7 @@
         </figure>
         <div class="renders">
           <img src="img/bij-nestwand-540.webp" width="540" height="540" loading="lazy" alt="Nestwand van onderaf, met bijen bij de invliegopeningen">
-          <img src="img/bij-scan-540.webp" width="540" height="540" loading="lazy" alt="Drie 4K-camera's scannen de nestwand">
+          <img src="img/bij-scan-540.webp" width="540" height="540" loading="lazy" alt="Drie 4K-camera&#x27;s scannen de nestwand">
           <img src="img/bij-berm-540.webp" width="540" height="540" loading="lazy" alt="Cameraunit bij een bijenhotel in een bloemrijke berm">
         </div>
       </div>
@@ -296,7 +367,7 @@
   </div>
 </footer>
 
-
+<script src="js/taal.js" defer></script>
 <script src="js/site.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="{{LANG}}">
+<head>
+<meta charset="utf-8">
+<script>if(location.protocol==="http:"&&/(^|\.)areainspect\.com$/.test(location.hostname))location.replace("https://areainspect.com"+location.pathname+location.search+location.hash);</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{pv_title}}</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="{{R}}favicon.ico" sizes="any">
+<link rel="stylesheet" href="{{R}}css/site.css">
+<script>window.AI_T={{JS_T}};</script>
+<script src="https://test-app.jt-ecologie.nl/api/teller.js" defer></script>
+</head>
+<body>
+<header class="kop">
+  {{TAALMENU}}
+  <div class="wrap">
+    <a class="logo" href="./" style="width:50%"><img src="{{R}}img/areainspect-logo.webp" width="1225" height="238" alt="{{pv_logo_alt}}"></a>
+  </div>
+</header>
+<main class="blok">
+  <div class="wrap" style="max-width:760px;display:flex;flex-direction:column;gap:18px">
+    <h1 class="h2">{{pv_h1}}</h1>
+    <p>{{pv_intro}}</p>
+    <h2 style="font-size:22px">{{pv_form_h2}}</h2>
+    <p>{{pv_form_p}}</p>
+    <h2 style="font-size:22px">{{pv_cookies_h2}}</h2>
+    <p>{{pv_cookies_p}}</p>
+    <h2 style="font-size:22px">{{pv_taal_h2}}</h2>
+    <p>{{pv_taal_p}}</p>
+    <h2 style="font-size:22px">{{pv_stat_h2}}</h2>
+    <p>{{pv_stat_p}}</p>
+    <h2 style="font-size:22px">{{pv_rechten_h2}}</h2>
+    <p>{{pv_rechten_p}}</p>
+    <p><a class="btn btn-zwart" href="./">{{pv_terug}}</a></p>
+  </div>
+</main>
+<footer>
+  <div class="wrap"><span>© 2026 AreaInspect</span><span><a href="mailto:info@areainspect.com">info@areainspect.com</a></span></div>
+</footer>
+<script src="{{R}}js/taal.js" defer></script>
+</body>
+</html>
