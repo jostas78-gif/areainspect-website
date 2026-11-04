@@ -30,6 +30,12 @@ if(!doel){
   'Europe/Kyiv':'uk','Europe/Kiev':'uk','Europe/Uzhgorod':'uk','Europe/Zaporozhye':'uk'
  };
  var t=Z[tz];
+ // Windows geeft voor heel Midden- of Oost-Europa vaak één stad door (bijv. Berlijn of Parijs).
+ // Valt de tijdzone in zo'n groep en is de eerste browsertaal een taal uit dezelfde groep, dan wint die taal.
+ var eerste=nav[0]==='nb'||nav[0]==='nn'?'no':nav[0]==='bs'?'hr':nav[0];
+ var CET=['nl','de','fr','es','it','sv','da','no','pl','hr','sr','hu','cs','sk','sl'],EET=['fi','uk','lv','et','lt','bg','el','ro'];
+ var off=-new Date(2026,0,15).getTimezoneOffset();
+ if(/^(Europe|Africa\/Ceuta|Arctic)/.test(tz)&&((off===60&&CET.indexOf(eerste)>-1)||(off===120&&EET.indexOf(eerste)>-1)))t=eerste;
  // Landen met meerdere talen: de taal van de browser beslist
  if(tz==='Europe/Brussels')t=heeft('fr')&&!heeft('nl')?'fr':heeft('de')&&!heeft('nl')?'de':'nl';
  else if(tz==='Europe/Zurich')t=heeft('fr')?'fr':heeft('it')?'it':'de';
